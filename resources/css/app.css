@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html{
+    font-family: "Montserrat", sans-serif !important;
+}
+
+/*@keyframes exampleAnimation {*/
+/*    0% {*/
+/*        transform: translateX(0);*/
+/*    }*/
+/*    100% {*/
+/*        transform: translateX(-500px);*/
+/*    }*/
+/*}*/
+
+/*.slider{*/
+/*    animation: exampleAnimation 2s ease-in-out forwards !important;*/
+/*}*/
+
+
