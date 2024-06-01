@@ -26,7 +26,18 @@
                         <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                         </svg>
-                        <a href="#" data-cityId="{{$bread_crumbs_arr[0]->city_id}}" class="ms-1 sm:text-xs font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white filter-back-city">{{$bread_crumbs_arr[0]->city_name}}</a>
+                        <a href="#" data-cityId="{{$bread_crumbs_arr[0]->city_id}}" class="ms-1 text-xs font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white filter-back-city">{{$bread_crumbs_arr[0]->city_name}}</a>
+                    </div>
+                </li>
+            @endif
+
+            @if(isset($bread_crumbs_arr[0]->pub_name))
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <a href="#" data-pubId="{{$bread_crumbs_arr[0]->pub_id}}" class="ms-1 text-xs font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white filter-back-pub">{{$bread_crumbs_arr[0]->pub_name}}</a>
                     </div>
                 </li>
             @endif

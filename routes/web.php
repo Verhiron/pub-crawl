@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::post('/city', [DashboardController::class, 'getCities']);
+    Route::post('/pubs', [DashboardController::class, 'getPubs']);
     Route::post('/beers', [DashboardController::class, 'getBeers']);
+    Route::get('/add', [ReviewController::class, 'index']);
 });
+
 

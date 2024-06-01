@@ -14,7 +14,13 @@ $(document).ready(function() {
 
     $('#cities').on('change', function() {
         var city = this.value;
+        ajaxCall(JSON.stringify({'city': city}), '/pubs', csrfToken);
         ajaxCall(JSON.stringify({'city': city}), '/beers', csrfToken);
+    });
+
+    $('#pubs').on('change', function() {
+        var pub = this.value;
+        ajaxCall(JSON.stringify({'pub': pub}), '/beers', csrfToken);
     });
 
     $('#clear-search').on('click', function() {
@@ -37,6 +43,11 @@ $(document).on('click', '.filter-back-city', function (){
     ajaxCall(JSON.stringify({'city': city}), '/beers', csrfToken);
 });
 
+$(document).on('click', '.filter-back-pub', function (){
+    var pub = $(this).attr("data-pubId");
+    ajaxCall(JSON.stringify({'pub': pub}), '/beers', csrfToken);
+});
+
 $(document).on('click', '.filter-back-all', function (){
     clearSearch(csrfToken);
 });
@@ -51,6 +62,11 @@ function clearSearch(csrfToken){
 function clearCitySelect(){
     var selectBox = $('#cities');
     selectBox.empty().append('<option selected value="0" disabled="disabled">Choose a city</option>');
+}
+
+function clearPubSelect(){
+    var selectBox = $('#pubs');
+    selectBox.empty().append('<option selected value="0" disabled="disabled">Choose a pub</option>');
 }
 
 function getBeers(csrfToken){
@@ -100,11 +116,22 @@ function responseAction(response){
                         text: city.city_name
                     }));
                 });
-                $('.city_name_show').removeClass('hidden');
             }
         break;
         case 'beers-action':
             $('.beer-list-view').html(response.data.html);
+        break;
+        case 'pubs-action':
+            clearPubSelect();
+            if(response.data.params.length > 0) {
+                var pubs = response.data.params;
+                $.each(pubs, function (index, pub) {
+                    $('#pubs').append($('<option>', {
+                        value: pub.pub_id,
+                        text: pub.pub_name
+                    }));
+                });
+            }
         break;
     }
     // console.log(response.data.params[0].city_name);
