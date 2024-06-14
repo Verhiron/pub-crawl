@@ -50,6 +50,16 @@ class DashboardController extends Controller
         return $result = $this->successMessage('', 'pubs-action', '', $pubs);
     }
 
+    public function getBeerList(){
+        $beers = DB::select('CALL getAllBeers()');
+        return $result = $this->successMessage('', 'beers-action', '', $beers);
+    }
+
+
+    public function test(){
+        return view('test-page');
+    }
+
     private function successMessage(string $message = '', string $action, string $html, $params = [], $bread_crumbs = []): string
     {
         //$this->successMessage('', 'fetched-cities', 'html', $values);

@@ -34,7 +34,7 @@
 
             <div class="max-w-full flex flex-col md:flex-row sm:mx-auto">
                 <!-- Country Selector -->
-                <select id="countries" class="w-full md:w-auto mb-2 bg-white border border-blue-900 text-black font-medium text-sm sm:rounded-l-lg border-l-0 border-r-0 dark:border-s-gray-700 block w-full p-2.5">
+                <select id="countries" class="w-full md:w-auto mb-2 bg-gray-50 border border-gray-500 text-gray-900 bg-white text-black font-medium text-sm sm:rounded-l-lg border-l-0 border-r-0 block w-full p-2.5">
                     <option selected disabled="disabled" value="0">Choose a country</option>
                     @foreach ($countries as $country)
                         <option value="{{$country->country_id}}">{{$country->country}}</option>
@@ -42,12 +42,12 @@
                 </select>
 
                 <!-- City Selector -->
-                <select id="cities" class="w-full md:w-auto mb-2 bg-white border border-blue-900 text-black font-medium text-sm sm:rounded-none border-l-0 border-r-0 dark:border-s-gray-700 block w-full p-2.5">
+                <select id="cities" class="w-full md:w-auto mb-2 bg-white border border-gray-500 text-gray-900 font-medium text-sm sm:rounded-none border-l-0 border-r-0 block w-full p-2.5">
                     <option selected value="0" disabled="disabled">Choose a city</option>
                 </select>
 
                 <!-- Other Selector -->
-                <select id="pubs" class="w-full md:w-auto mb-2 bg-white border border-blue-900 text-black font-medium text-sm sm:rounded-r-lg border-l-0 block w-full p-2.5">
+                <select id="pubs" class="w-full md:w-auto mb-2 bg-white border border-gray-500 text-gray-900 font-medium text-sm sm:rounded-r-lg border-l-0 block w-full p-2.5">
                     <option selected value="0" disabled="disabled">Choose a pub</option>
                     <!-- Your foreach loop for options -->
                 </select>
@@ -67,5 +67,7 @@
 
         </div>
 
-
+    @push('scripts')
+        @vite('resources/js/dashboard.js')
+    @endpush
 </x-layout>
