@@ -7,6 +7,32 @@ html{
     font-family: "Montserrat", sans-serif !important;
 }
 
+.city-selection.selected {
+    background-color: #082F49;
+    color: #ffffff;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
+}
+
+
+
+
+
+
 
 
 

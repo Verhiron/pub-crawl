@@ -18,15 +18,36 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', [DashboardController::class, 'index']);
 
 Route::prefix('/')->group(function () {
+    //get the home page - country selector
     Route::get('/', [DashboardController::class, 'index']);
-    Route::post('/city', [DashboardController::class, 'getCities']);
-    Route::post('/pubs', [DashboardController::class, 'getPubs']);
     Route::post('/beers', [DashboardController::class, 'getBeers']);
-    Route::post('/beerList', [DashboardController::class, 'getBeerList']);
+    Route::post('/filterPubs', [DashboardController::class, 'getPubs']);
+
+
+
+    //get the add review views + filtering city/pubs
     Route::get('/add', [ReviewController::class, 'index']);
+    Route::post('/city', [ReviewController::class, 'getCities']);
+    Route::post('/pubs', [ReviewController::class, 'getPubs']);
+
+
     Route::post('/getBeerReviewForms', [ReviewController::class, 'generateReviewForms']);
     Route::post('/submitReview', [ReviewController::class, 'submitReview']);
-    Route::get('/test', [DashboardController::class, 'test']);
+    Route::post('/testBeer', [ReviewController::class, 'testBeer']);
+
+
+});
+
+
+
+//fetch the details from the selected country
+Route::prefix('/country/')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/{country}', [DashboardController::class, 'getCountryDetails']);
+});
+
+Route::prefix('/reviews/')->group(function () {
+    Route::get('/{reference}', [ReviewController::class, 'getReview']);
 });
 
 

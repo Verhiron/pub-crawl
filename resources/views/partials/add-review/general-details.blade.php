@@ -27,7 +27,7 @@
 
 
 @push('scripts')
-    @vite('resources/js/add-review-v2.js')
+    @vite('resources/js/add-review.js')
 @endpush
 
 
