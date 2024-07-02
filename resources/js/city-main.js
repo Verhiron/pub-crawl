@@ -107,7 +107,6 @@ function responseAction(response){
         break;
         case 'pubs-action':
             $('.pubList').html(response.data.html);
-            console.log(response.data);
         break;
     }
     // console.log(response.data.params[0].city_name);
