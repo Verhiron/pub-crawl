@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    getBeers();
+    getCityBeers();
 
     $('.city-selection').on('click', function() {
         let $this = $(this);
@@ -10,7 +10,8 @@ $(document).ready(function() {
         if($this.hasClass('selected')){
 
             $this.removeClass('selected');
-            getBeers();
+            $('.pubList').html("");
+            getCityBeers();
 
         }else{
 
@@ -18,13 +19,40 @@ $(document).ready(function() {
             $this.addClass('selected');
 
             var city_id = $this.data('city-id');
-            getBeers(city_id);
+            getCityBeers(city_id);
             getPubs(city_id);
 
         }
 
     });
 
+
+
+    $(document).on('click', '.pub-selection', function (e){
+        let $this = $(this);
+
+        // console.log($this);
+
+        if($this.hasClass('selected')){
+
+            $this.removeClass('selected');
+
+            var selectedCity = $('.city-selection.selected').data('city-id');
+            getCityBeers(selectedCity);
+
+        }else{
+
+            $('li.pub-selection').removeClass('selected');
+            $this.addClass('selected');
+
+            var pub_id = $this.data('pub-id');
+            console.log(pub_id);
+            getPubBeers(pub_id);
+            // getPubs(city_id);
+
+        }
+
+    });
 
     $(document).on('input', '.citySearch', function (e){
 
@@ -42,6 +70,22 @@ $(document).ready(function() {
 
     });
 
+    $(document).on('input', '.pubSearch', function (e){
+
+        let pubs = $(".pub-selection").filter("[data-pub-name]");
+        let input = $(this);
+        let value = input.val().trim().toLowerCase();
+
+        pubs.each(function (){
+            let pub = $(this);
+            let pub_name = pub.attr("data-pub-name");
+
+            if(pub.hasClass("selected")) return true;
+            !pub_name.toLowerCase().includes(value) ? pub.addClass('hidden') : pub.removeClass('hidden');
+        });
+
+    });
+
     //reset the search
     $('.clearSearch').on('click', function() {
         $('.citySearch').val('');
@@ -52,7 +96,7 @@ $(document).ready(function() {
 
 });
 
-function getBeers(city = null){
+function getCityBeers(city = null){
 
     if(city !== null){
 
@@ -66,6 +110,13 @@ function getBeers(city = null){
         ajaxCall(JSON.stringify({'country': country}), '/beers');
     }
 
+}
+
+
+function getPubBeers(pub = null){
+    if(pub !== null){
+        ajaxCall(JSON.stringify({'pub': pub}), '/beers');
+    }
 }
 
 function getPubs(city = null){

@@ -1,3 +1,5 @@
+@import 'flowbite';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +9,7 @@ html{
     font-family: "Montserrat", sans-serif !important;
 }
 
-.city-selection.selected {
+.city-selection.selected, .pub-selection.selected {
     background-color: #082F49;
     color: #ffffff;
 }

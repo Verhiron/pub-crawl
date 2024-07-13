@@ -15,29 +15,35 @@ class DashboardController extends Controller
     }
 
     public function getCountryDetails($country_iso){
-        $country_data = DB::table('countries')->where('iso_code', $country_iso)->select('country_id', 'country_img')->first();
+        $country_data = DB::table('countries')->where('iso_code', $country_iso)->select('country_id', 'country_img', 'country')->first();
         $cities = DB::table('cities')->where('country_id',$country_data->country_id)->get();
         $country_img = $country_data->country_img;
-        return view('cities-main', compact('cities', 'country_img'));
+        $country = $country_data->country;
+        return view('cities-main', compact('cities', 'country_img', 'country'));
     }
 
     public function getBeers(Request $request)
     {
-        // Check if the 'city' parameter is present
-        if ($request->has('city')) {
-            $city_id = $request->input('city');
-            $beers = DB::select('CALL getAllBeersByCity(?)', [$city_id]);
-        } elseif ($request->has('country')) {
+
+        if($request->has('country')){
 
             $country = $request->input('country');
 
             $country_id = DB::table('countries')->where('iso_code', $country)->value('country_id');
-            if ($country_id) {
-                $beers = DB::select('CALL getAllBeersByCountry(?)', [$country_id]);
-            } else {
-                $beers = [];
-            }
-        } else {
+
+            $beers = ($country_id) ? DB::select('CALL getAllBeersByCountry(?)', [$country_id]) : [];
+
+        }elseif ($request->has('city')){
+
+            $city_id = $request->input('city');
+            $beers = DB::select('CALL getAllBeersByCity(?)', [$city_id]);
+
+        }elseif ($request->has('pub')){
+
+            $pub_id = $request->input('pub');
+            $beers = DB::select('CALL getAllBeersByPub(?)', [$pub_id]);
+
+        }else{
             $beers = DB::select('CALL getAllBeers()');
         }
 

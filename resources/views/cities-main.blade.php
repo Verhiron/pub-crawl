@@ -2,7 +2,7 @@
     <div class="hidden sm:flex relative bg-gray-800 h-48 md:h-40 items-center justify-center ">
         <img src="{{$country_img}}" alt="Country Image" class="absolute inset-0 w-full h-full object-cover opacity-50" >
         <div class="relative z-10 text-center">
-            <h1 class="text-2xl md:text-4xl font-bold text-white">United Kingdom</h1>
+            <h1 class="text-2xl md:text-4xl font-bold text-white">{{$country}}</h1>
         </div>
     </div>
 
@@ -14,12 +14,12 @@
 
         {{--          TODO: filter the pubs      --}}
                 <div class="mb-4 border-b border-gray-200">
-                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center border border-sky-950">
                         <li class="w-1/2">
-                            <button data-modal-target="city-select-modal" data-modal-toggle="city-select-modal" class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center text-gray-500 hover:text-purple-600 hover:border-purple-600">City Filter</button>
+                            <button data-modal-target="city-select-modal" data-modal-toggle="city-select-modal" class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center text-black">City Filter</button>
                         </li>
                         <li class="w-1/2">
-                            <button data-modal-target="pub-select-modal" data-modal-toggle="pub-select-modal" class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center text-gray-500 hover:text-purple-600 hover:border-purple-600">Pub Filter</button>
+                            <button data-modal-target="pub-select-modal" data-modal-toggle="pub-select-modal" class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center text-black ">Pub Filter</button>
                         </li>
                     </ul>
                 </div>
@@ -98,12 +98,12 @@
                 <div class="w-1/4 border overflow-y-auto h-screen rounded-lg shadow-md">
 
                     <div class="mb-4 border-b border-gray-200">
-                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-black border-header-yellow" data-tabs-inactive-classes="text-black border-gray-100 hover:border-header-yellow" role="tablist">
+                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" data-tabs-active-classes="text-black border-sky-950" data-tabs-inactive-classes="text-black border-gray-100 hover:border-sky-950" role="tablist">
                             <li class="w-1/2" role="presentation">
                                 <button class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center" id="profile-styled-tab" data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">City</button>
                             </li>
                             <li class="w-1/2" role="presentation">
-                                <button class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center hover:border-header-yellow" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Pubs</button>
+                                <button class="inline-block w-full p-4 border-b-2 rounded-t-lg text-center hover:border-sky-950" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Pubs</button>
                             </li>
                         </ul>
                     </div>

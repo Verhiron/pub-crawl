@@ -128,6 +128,12 @@ $(document).ready(function() {
         validatePubInput();
     });
 
+    $('.pub-value-rating-input').on('change', function() {
+        var selectedValue = $(this).val();
+        togglePubAdditionalComments('pub-value', selectedValue);
+        validatePubInput();
+    });
+
     $('#beer-add').on('change', function() {
         var beer = this.value;
         if(beer === 'other'){
@@ -351,8 +357,9 @@ function validatePubInput(){
     var isBeerSelectionSet = $('input[name="pub-beer-selection-rating"]:checked').length > 0;
     var isFurnitureSet = $('input[name="pub-furniture-rating"]:checked').length > 0;
     var isToiletSet = $('input[name="pub-toilet-rating"]:checked').length > 0;
+    var isValueSet = $('input[name="pub-value-rating"]:checked').length > 0;
 
-    if (isAtmosphereSet && isAestheticSet && isBeerSelectionSet && isFurnitureSet && isToiletSet) {
+    if (isAtmosphereSet && isAestheticSet && isBeerSelectionSet && isFurnitureSet && isToiletSet && isValueSet) {
         //show the beer review button
         //TODO: might need to change from ID to class if wanting progress buttons at the top and bottom
         slideDownClass('to-beer-add-section');
@@ -454,6 +461,11 @@ function responseAction(response){
 
             clearSelect('cities-add', 'Choose a City');
 
+            $('#cities-add').append($('<option>', {
+                value: 'other',
+                text: 'Other'
+            }));
+
             if(response.data.params.length > 0){
                 var cities = response.data.params;
                 $.each(cities, function(index, city) {
@@ -464,15 +476,15 @@ function responseAction(response){
                 });
             }
 
-            $('#cities-add').append($('<option>', {
-                value: 'other',
-                text: 'Other'
-            }));
-
         break;
         case 'pubs-action':
 
             clearSelect('pub-add', 'Choose a Pub');
+
+            $('#pub-add').append($('<option>', {
+                value: 'other',
+                text: 'Other'
+            }));
 
             if(response.data.params.length > 0) {
                 var pubs = response.data.params;
@@ -484,14 +496,15 @@ function responseAction(response){
                 });
             }
 
-            $('#pub-add').append($('<option>', {
-                value: 'other',
-                text: 'Other'
-            }));
             break;
 
         case 'beers-action':
             clearSelect('beer-add', 'Choose a Beer');
+
+            $('#beer-add').append($('<option>', {
+                value: 'other',
+                text: 'Other'
+            }));
 
             if(response.data.params.length > 0) {
                 var beers = response.data.params;
@@ -502,17 +515,18 @@ function responseAction(response){
                     }));
                 });
             }
-            $('#beer-add').append($('<option>', {
-                value: 'other',
-                text: 'Other'
-            }));
+
             break;
         case 'beer-reviews-action':
             console.log(response.data);
             $('#form-container').html(response.data.html);
         break;
         case 'submitted-review-action':
-            console.log(response.data);
+            // console.log(response.data);
+            //TODO: do some checks here
+            var reference = response.data.params;
+            var redirectUrl = "/review/" + reference;
+            window.location.href = redirectUrl;
         break;
     }
 

@@ -9,15 +9,16 @@
             </button>
             <div class="p-4 md:p-5 space-y-4">
                 <div class="my-2" id="beer-add-input">
-                    <label for="beer-add" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Beer</label>
-                    <select id="beer-add" name="beer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="beer-add" class="block mb-1 font-medium">Beer</label>
+                    <hr class="mb-2 w-1/2">
+                    <select id="beer-add" name="beer" class="bg-gray-50 border border-gray-300 font-medium text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option selected value="0" disabled="disabled">Choose a Beer</option>
                     </select>
                 </div>
-
                 <div class="my-2 hidden" id="other-beer-input">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Other - Beer</label>
-                    <input id="beer-other" name="other-beer" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter A Pub" />
+                    <label class="block mb-1 font-medium">Other - Beer</label>
+                    <hr class="mb-2 w-1/2">
+                    <input id="beer-other" name="other-beer" class="bg-gray-50 border border-gray-300 font-medium text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter A Pub" />
                 </div>
             </div>
             <!-- Modal footer -->

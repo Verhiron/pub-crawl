@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>Pub-Crawl</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @vite(['resources/css/app.css','resources/js/app.js', 'resources/js/csrf.js'])
     @stack('scripts')
@@ -17,6 +17,7 @@
 </head>
 
 <body>
+
 <header>
     @include('partials.navigation.header')
 </header>

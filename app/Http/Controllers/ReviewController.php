@@ -6,6 +6,7 @@ use DateTime;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Error;
 use function Laravel\Prompts\text;
 
@@ -28,6 +29,11 @@ class ReviewController extends Controller
     public function getPubs(Request $request){
         $pubs = DB::select('CALL getPubs(?)', [$request->city]);
         return $result = $this->successMessage('', 'pubs-action', '', $pubs);
+    }
+
+    public function getBeerList(){
+        $beers = DB::select('CALL getAllBeers()');
+        return $result = $this->successMessage('', 'beers-action', '', $beers);
     }
 
     public function generateReviewForms(Request $request){
@@ -213,11 +219,30 @@ class ReviewController extends Controller
 
 
     public function getReview($reference){
-        $reviews = DB::select('CALL getReview(?)', [$reference]);
+        $reviews = DB::select('CALL getBeerReviews(?)', [$reference]);
 //        print_r(json_encode($reviews, JSON_PRETTY_PRINT));
         print_r("<pre>");
         print_r($reviews);
         print_r("</pre>");
+    }
+
+    public function getOverallReview($reference){
+        $beer_reviews = DB::select('CALL getBeerReviews(?)', [$reference]);
+        $pub_review = DB::select('CALL getPubReview(?)', [$reference]);
+
+        $reviews = [
+            "beer_reviews"=>$beer_reviews,
+            "pub_review"=>$pub_review[0],
+        ];
+
+
+        return view('review', compact('reviews'));
+
+
+        //        print_r(json_encode($reviews, JSON_PRETTY_PRINT));
+//        print_r("<pre>");
+//        print_r($total_arr);
+//        print_r("</pre>");
     }
 
 

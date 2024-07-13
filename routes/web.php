@@ -29,6 +29,7 @@ Route::prefix('/')->group(function () {
     Route::get('/add', [ReviewController::class, 'index']);
     Route::post('/city', [ReviewController::class, 'getCities']);
     Route::post('/pubs', [ReviewController::class, 'getPubs']);
+    Route::post('/beerList', [ReviewController::class, 'getBeerList']);
 
 
     Route::post('/getBeerReviewForms', [ReviewController::class, 'generateReviewForms']);
@@ -46,8 +47,10 @@ Route::prefix('/country/')->group(function () {
     Route::get('/{country}', [DashboardController::class, 'getCountryDetails']);
 });
 
-Route::prefix('/reviews/')->group(function () {
-    Route::get('/{reference}', [ReviewController::class, 'getReview']);
+//TODO: make a route for reviews - which shows a complete list of the reviewsg
+
+Route::prefix('/review/')->group(function () {
+    Route::get('/{reference}', [ReviewController::class, 'getOverallReview'])->name('reviews.show');
 });
 
 

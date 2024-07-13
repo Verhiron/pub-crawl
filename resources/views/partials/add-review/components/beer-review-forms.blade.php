@@ -15,7 +15,8 @@ $total_beers = count($beerList);
         <hr class="w-1/2 mx-auto">
 
         {{--  Serving Type  --}}
-        <label class="block mb-2 text-md font-lg text-black">Serving Type</label>
+        <label class="block my-1 font-medium">Serving Type</label>
+        <hr class="mb-2 w-1/2">
         <ul class="grid w-full gap-6 md:grid-cols-3 my-5">
             <li>
                 <input type="radio" id="serving-bottle-{{$index + 1}}" name="serving-type" value="bottle" class="hidden peer" />
@@ -49,7 +50,8 @@ $total_beers = count($beerList);
 
         {{-- Served in correct glass? --}}
         <div class="correct-glass-section hidden">
-            <label class="block mb-2 text-md font-lg text-black mt-5">Served In The Correct Glass?</label>
+            <label class="block mb-1 font-medium mt-5">Served In The Correct Glass?</label>
+            <hr class="mb-2 w-1/2">
             <ul class="grid w-full gap-6 md:grid-cols-2 mb-5">
                 <li>
                     <input type="radio" id="beer-review-correct-glass-yes-{{$index + 1}}" name="beer-review-correct-glass" value="yes" class="hidden peer" />
@@ -72,7 +74,8 @@ $total_beers = count($beerList);
         </div>
 
         {{-- Appearance --}}
-        <label class="block mb-2 text-md font-lg text-black mt-5">Appearance</label>
+        <label class="block mb-1 font-medium mt-5">Appearance</label>
+        <hr class="mb-2 w-1/2">
         <ul class="grid grid-cols-6 gap-2">
             @for ($i = 0; $i <= 5; $i++)
                 <li>
@@ -87,7 +90,8 @@ $total_beers = count($beerList);
         </ul>
 
         {{-- Taste --}}
-        <label class="block mb-2 text-md font-lg text-black mt-5">Taste</label>
+        <label class="block mb-1 font-medium mt-5">Taste</label>
+        <hr class="mb-2 w-1/2">
         <ul class="grid grid-cols-6 gap-2">
             @for ($i = 0; $i <= 5; $i++)
                 <li>
@@ -102,7 +106,8 @@ $total_beers = count($beerList);
         </ul>
 
         {{-- overall rating --}}
-        <label class="block mb-2 text-md font-lg text-black mt-5">Overall Rating</label>
+        <label class="block mb-1 font-medium mt-5">Overall Rating</label>
+        <hr class="mb-2 w-1/2">
         <ul class="grid grid-cols-6 gap-2">
             @for ($i = 0; $i <= 5; $i++)
                 <li>
@@ -117,7 +122,7 @@ $total_beers = count($beerList);
         </ul>
 
         {{-- Additional Comments --}}
-        <label for="beer-review-additional-{{$index + 1}}" class="block mb-2 text-md font-lg text-black mt-5">Additional Comments</label>
+        <label for="beer-review-additional-{{$index + 1}}" class="block mb-2 font-medium mt-5">Additional Comments</label>
         <textarea id="beer-review-additional-{{$index + 1}}" name="beer-review-additional-comment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter additional comments"></textarea>
 
     </form>
