@@ -75,7 +75,6 @@
             </div>
         </div>
 
-
         <div class="flex gap-4 my-7 mx-auto">
             <div class="flex flex-col p-5 rounded-lg shadow-md border w-1/3 ml-auto h-full">
                 <div class="px-7">

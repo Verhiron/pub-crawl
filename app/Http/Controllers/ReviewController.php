@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Jenssegers\Agent\Agent;
 use PhpParser\Error;
 use function Laravel\Prompts\text;
 
@@ -227,6 +228,15 @@ class ReviewController extends Controller
     }
 
     public function getOverallReview($reference){
+        //this is the mobile agent
+        $agent = new Agent();
+
+        //checks the device - decides the view
+        $isTablet = $agent->isTablet();
+        $isMobile = $agent->isMobile();
+        $isDesktop = $agent->isDesktop();
+
+
         $beer_reviews = DB::select('CALL getBeerReviews(?)', [$reference]);
         $pub_review = DB::select('CALL getPubReview(?)', [$reference]);
 
@@ -235,14 +245,11 @@ class ReviewController extends Controller
             "pub_review"=>$pub_review[0],
         ];
 
-
-        return view('review', compact('reviews'));
-
-
-        //        print_r(json_encode($reviews, JSON_PRETTY_PRINT));
-//        print_r("<pre>");
-//        print_r($total_arr);
-//        print_r("</pre>");
+        if($isMobile || $isTablet){
+            return view('review-mobile', compact('reviews'));
+        }else{
+            return view('review-desktop', compact('reviews'));
+        }
     }
 
 
