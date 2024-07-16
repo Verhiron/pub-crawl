@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Agent\Agent;
 use function Laravel\Prompts\select;
 
 class DashboardController extends Controller
@@ -15,11 +16,27 @@ class DashboardController extends Controller
     }
 
     public function getCountryDetails($country_iso){
+
+        $agent = new Agent();
+
+        //checks the device - decides the view
+        $isTablet = $agent->isTablet();
+        $isMobile = $agent->isMobile();
+        $isDesktop = $agent->isDesktop();
+
+
         $country_data = DB::table('countries')->where('iso_code', $country_iso)->select('country_id', 'country_img', 'country')->first();
         $cities = DB::table('cities')->where('country_id',$country_data->country_id)->get();
         $country_img = $country_data->country_img;
         $country = $country_data->country;
-        return view('cities-main', compact('cities', 'country_img', 'country'));
+
+
+        if($isMobile || $isTablet){
+            return view('cities-main-mobile', compact('cities', 'country_img', 'country'));
+        }else{
+            return view('cities-main-desktop', compact('cities', 'country_img', 'country'));
+        }
+
     }
 
     public function getBeers(Request $request)
