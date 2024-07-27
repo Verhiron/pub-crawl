@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
 use function Laravel\Prompts\select;
@@ -15,28 +16,48 @@ class DashboardController extends Controller
         return view('dashboard', compact('countries'));
     }
 
-    public function getCountryDetails($country_iso){
 
-        $agent = new Agent();
+    public function getCitiesMainDetails($country_iso, Request $request){
 
-        //checks the device - decides the view
-        $isTablet = $agent->isTablet();
-        $isMobile = $agent->isMobile();
-        $isDesktop = $agent->isDesktop();
+        //country data
+        $country_data = DB::table('countries')->where('iso_code', $country_iso)->select('country_id', 'country', 'country_img')->first();
 
-
-        $country_data = DB::table('countries')->where('iso_code', $country_iso)->select('country_id', 'country_img', 'country')->first();
+        //city data
         $cities = DB::table('cities')->where('country_id',$country_data->country_id)->get();
-        $country_img = $country_data->country_img;
-        $country = $country_data->country;
 
+        $city = $request->query('city');
+        $rating = $request->query('rating');
+        $pub_name = $request->query('pub');
+        $page = request()->input('page', 1); // Get the current page, default to 1 if not present
 
-        if($isMobile || $isTablet){
-            return view('cities-main-mobile', compact('cities', 'country_img', 'country'));
-        }else{
-            return view('cities-main-desktop', compact('cities', 'country_img', 'country'));
+        $pub_query = DB::table('country_pub_view')->where('iso_code', $country_iso);
+
+        if($city){
+            $pub_query->where('city_id', $city);
         }
 
+        if ($rating) {
+            $pub_query->where('overall_rating', '>=', $rating);
+        }
+
+        if ($pub_name) {
+            $pub_query->where('pub_name', 'LIKE', "%{$pub_name}%");
+        }
+
+        $pub_data = $pub_query->paginate(5, ['*'], 'page', $page); // Adjust the number of items per page as needed
+
+        $pagination = [
+            'current_page' => $pub_data->currentPage(),
+            'last_page' => $pub_data->lastPage(),
+            'total' => $pub_data->total(),
+            'per_page' => $pub_data->perPage(),
+            'from' => $pub_data->firstItem(),
+            'to' => $pub_data->lastItem(),
+        ];
+
+//        country/GB?rating=1&city=1
+
+        return view('cities-main', compact( 'country_data', 'cities', 'pub_data', 'pagination'));
     }
 
     public function getBeers(Request $request)

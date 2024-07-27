@@ -245,11 +245,7 @@ class ReviewController extends Controller
             "pub_review"=>$pub_review[0],
         ];
 
-        if($isMobile || $isTablet){
-            return view('review-mobile', compact('reviews'));
-        }else{
-            return view('review-desktop', compact('reviews'));
-        }
+        return view('review-desktop', compact('reviews'));
     }
 
 

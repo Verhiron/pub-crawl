@@ -3,10 +3,9 @@ import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     server: {
-        host: '0.0.0.0', // Allows access from network
-        port: 5173, // Default Vite port, change if needed
+        host: '0.0.0.0', // Ensures Vite is accessible from outside the container
         hmr: {
-            host: '192.168.1.101', // Replace with your local IP address
+            host: 'localhost',
         },
     },
     plugins: [
